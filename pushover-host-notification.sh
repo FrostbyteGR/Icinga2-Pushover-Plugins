@@ -83,8 +83,8 @@ shift $((OPTIND-1))
 [ -z "$notificationState" ] && inputError "The host state value cannot be empty."
 [ -z "$notificationOutput" ] && inputError "The host output value cannot be empty."
 [ -z "$notificationLongDateTime" ] && inputError "The long date time value cannot be empty."
-[ -z "$notificationComment" ] || [ -z "$notificationAuthor" ] && inputError "The author value cannot be empty, if the comment value was given."
-[ -z "$notificationAuthor" ] || [ -z "$notificationComment" ] && inputError "The comment value cannot be empty, if the author value was given."
+[ ! -z "$notificationComment" ] && [ -z "$notificationAuthor" ] && inputError "The author value cannot be empty, if the comment value was given."
+[ ! -z "$notificationAuthor" ] && [ -z "$notificationComment" ] && inputError "The comment value cannot be empty, if the author value was given."
 
 # Construct the notification title
 notificationTitle="[${notificationType}] Host ${notificationHostDisplayName} is ${notificationState}!"
